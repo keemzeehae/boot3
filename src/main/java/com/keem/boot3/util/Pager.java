@@ -14,12 +14,25 @@ public class Pager {
 	// page 번호  (파라미터 값으로 세팅)
 	private Integer pn;
 	
+	
+	//--------------검색기능
+	private String search;
+	private String kind;
+	
+	
+	//-----------------JSP사용변수
+	private Integer startNum;
+	private Integer lastNum;
+	
+	private boolean pre;
+	private boolean next;
+	
 	public void makeRow() {
-		//pn : 1, perPage : 10, startRow : 0
-		//pn : 2, perPage : 10, startRow : 10
-		//pn : 3, perPage : 10, startRow : 20
+		//pn : 1, perPage : 10, startRow : 0 lastRow : 9
+		//pn : 2, perPage : 10, startRow : 10 lastRow : 19
+		//pn : 3, perPage : 10, startRow : 20 lastRow : 29
 		this.startRow=(this.getPn()-1)*this.getPerPage();
-		
+	
 	}
 
 	public Integer getPn() {

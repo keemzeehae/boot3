@@ -30,7 +30,17 @@
 	<select id="getList" parameterType="Pager" resultType="BoardVO">
 		SELECT * FROM BOARD 
 		WHERE NUM>0 
-		ORDER BY NUM DESC 
+		AND
+		<choose>
+			<when test="kind=='col1'">
+				CONTENTS
+			</when>
+			<otherwise>
+				TITLE
+			</otherwise>
+		</choose>
+		LIKE CONCAT('%',#{search},'%')
+		ORDER BY NUM DESC
 		LIMIT #{startRow},#{perPage}
 	</select>
 	
