@@ -32,14 +32,15 @@
 					</li>
 				</ul>
 				<form class="d-flex">
-					<fieldset>
-						<select name="kind">
-							<option value="col1">본문</option>
+					<div class="d-flex align-items-center">
+						<select class="form-select" aria-label="Default select example" name="kind">
+							<option value="col1">내용</option>
 							<option value="col2">제목</option>
+							<option value="col3">작성자</option>
 						</select> <input class="form-control me-2" type="text"
 							placeholder="Search" aria-label="Search" name="search" value="${pager.search}">
 						<button class="btn btn-outline-success" type="submit">Search</button>
-					</fieldset>
+					</div>>
 				</form>
 			</div>
 		</div>

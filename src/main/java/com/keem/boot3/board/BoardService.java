@@ -15,9 +15,14 @@ public class BoardService {
 	
 	public List<BoardVO> getList(Pager pager) throws Exception{
 		pager.makeRow();
+		Integer totalCount= boardMapper.total(pager);
+		pager.makenum(totalCount);
 		List<BoardVO> ar = boardMapper.getList(pager);
 		
 		return ar;
 	}
-	
+	public int setAdd(BoardVO boardVO) throws Exception{
+		int result = boardMapper.setAdd(boardVO);
+		return result;
+	}
 }

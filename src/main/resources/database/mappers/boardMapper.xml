@@ -35,15 +35,34 @@
 			<when test="kind=='col1'">
 				CONTENTS
 			</when>
-			<otherwise>
+			<when test="kind =='col2'">
 				TITLE
+			</when>
+			<otherwise>
+				WRITER
 			</otherwise>
 		</choose>
 		LIKE CONCAT('%',#{search},'%')
 		ORDER BY NUM DESC
 		LIMIT #{startRow},#{perPage}
 	</select>
-	
+	<select id="total" resultType="Integer" parameterType="Pager">
+		SELECT COUNT(NUM) FROM BOARD 
+		WHERE NUM>0 
+		AND
+		<choose>
+			<when test="kind=='col1'">
+				CONTENTS
+			</when>
+			<when test="kind =='col2'">
+				TITLE
+			</when>
+			<otherwise>
+				WRITER
+			</otherwise>
+		</choose>
+		LIKE CONCAT('%',#{search},'%')
+	</select>
 	<insert id="setAdd" parameterType="BoardVO">
 		INSERT INTO BOARD (NUM,TITLE, WRITER, CONTENTS, HIT, REGDATE, `REF`,STEP,`DEPTH`,CATEGORY)
 		VALUES(NULL,#{title},#{writer},#{contents},0,NOW(),0,0,0,1);

@@ -50,5 +50,55 @@ public class Pager {
 		}
 		return this.perPage;
 	}
+	// Getter : get + 멤버변수명, 멤버변수명의 첫글자는 대문자
+	public String getSearch() {
+		if(this.search==null) {
+			this.search="";
+		}
+			return this.search;
+	}
 	
+	public void makenum(Integer totalCount) {
+		// 전체 row의 갯수 구해옴
+		
+		// 전체 page 의 갯수 구하기
+		Integer totalPage=totalCount/this.getPerPage();
+		if(totalCount%this.getPerPage()!=0) {
+			totalPage++;
+			
+		}
+		// 블럭당 갯수 블럭 의미: 아래 보여지는 번호 
+		Integer perBlock=5;
+		
+		// 전체 블럭의 갯수
+		Integer totalBlock=totalPage/perBlock;
+		if(totalPage%perBlock!=0) {
+			totalBlock++;
+			
+		}
+		// page번호로 현재 몇번째 Block인지 계산
+		Integer curBlock = this.getPn()/perBlock;
+		if(this.getPn()%perBlock!=0) {
+			curBlock++;
+		}
+		
+		this.startNum=(curBlock-1)*perBlock+1;
+		this.lastNum=curBlock*perBlock;
+		
+		// 이전, 다음 블럭의 유무를
+		this.pre=false;
+		if(curBlock>1) {
+			this.pre=true;
+		}
+		
+		this.next=false;
+		if(totalBlock>curBlock) {
+			this.next=true;
+		}
+		
+		// 현재 블럭이 마지막 블럭번호와 같다면
+		if(curBlock==totalBlock) {
+			this.lastNum=totalPage;
+		}
+	}
 }
