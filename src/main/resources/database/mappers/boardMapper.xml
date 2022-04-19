@@ -23,9 +23,30 @@
 	</delete>
 
 
-	<select id="getDetail" parameterType="BoardVO" resultType="BoardVO">
-		SELECT * FROM BOARD WHERE NUM=#{num}
+	<select id="getDetail" parameterType="BoardVO" resultMap="detailResult">
+		SELECT B.*,BF.* FROM BOARD B 
+		LEFT OUTER JOIN 
+		BOARDFILES BF USING(NUM) 
+		WHERE NUM=#{num}
 	</select>
+	
+	<resultMap type="BoardVO" id="detailResult">
+			<id column="num" property="num"/>
+			<result column="title" property="title"/>
+			<result column="contents" property="contents"/>
+			<result column="writer" property="writer"/>
+			<result column="regDate" property="regDate"/>
+			<result column="hit" property="hit"/>
+			<result column="ref" property="ref"/>
+			<result column="step" property="step"/>
+			<result column="depth" property="depth"/>
+			<result column="category" property="category"/>
+		<collection property="filesVO" javaType="java.util.List" ofType="BoardFilesVO">
+			<id column="fileNum" property="fileNum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</collection>
+	</resultMap>
 	
 	<select id="getList" parameterType="Pager" resultType="BoardVO">
 		SELECT * FROM BOARD 
@@ -63,9 +84,9 @@
 		</choose>
 		LIKE CONCAT('%',#{search},'%')
 	</select>
-	<insert id="setAdd" parameterType="BoardVO">
-		INSERT INTO BOARD (NUM,TITLE, WRITER, CONTENTS, HIT, REGDATE, `REF`,STEP,`DEPTH`,CATEGORY)
-		VALUES(NULL,#{title},#{writer},#{contents},0,NOW(),0,0,0,1);
+	<insert id="setAdd" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="num">
+		INSERT INTO BOARD (NUM,TITLE, WRITER, CONTENTS, HIT, REGDATE,REF,STEP,DEPTH,CATEGORY)
+		VALUES(#{num},#{title},#{writer},#{contents},0,NOW(),0,0,0,1)
 	</insert>
 	
 	<update id="setUpdate" parameterType="BoardVO">

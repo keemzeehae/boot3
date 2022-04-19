@@ -20,42 +20,41 @@
 <div class="container mt-4">
 	<div class="row mt-4">
 			<div class="alert alert-primary" role="alert">
-				<h6 style="text-transform: uppercase;" class="text-center">${board} Write</h6>
+				<h6 style="text-transform: uppercase;" class="text-center">${board} Detail</h6>
 			</div>
-	<form action="./add" method="post" enctype="multipart/form-data">
 		<div class="mb-3">
 			<label for="Title" class="form-label">제목
-			</label> <input type="text" name="title" class="form-control"
-				id="Contents" aria-describedby="emailHelp">
-			<div id="emailHelp" class="form-text">100자 이하로 작성해주세요</div>
+			</label> <input type="text" readonly="readonly" name="title" class="form-control"
+				id="Contents" aria-describedby="emailHelp" value="${detail.title }">
 		</div>
 		<div class="mb-3">
 			<label for="contents" class="form-label">내용</label>
-			<input type="text" name="contents" class="form-control"
-				id="contents">
+			<input type="text" readonly="readonly" name="contents" class="form-control"
+				id="contents" value="${detail.contents }">
 		</div>
 		
 		<div class="mb-3">
 			<label for="writer" class="form-label">작성자</label>
-			<input type="text" name="writer" class="form-control"
-				id="writer">
+			<input type="text" readonly="readonly" name="writer" class="form-control"
+				id="writer" value="${detail.writer }">
 		</div>
-		<div class="mb-3">
-			<label for="files" class="form-label">File</label>
-			<input type="file" name="files" class="form-control"
-				id="file1">
-		</div>
-		<div class="mb-3">
-			<label for="files" class="form-label">File</label>
-			<input type="file" name="files" class="form-control"
-				id="file2">
-		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
-	</form>
+		
 </div>
 </div>
-	
 
+	<div class="card" style="width: 18rem;">
+   <c:forEach items="${detail.filesVO}" var="f">
+  <img src="../resources/upload/board/${f.fileName}" class="card-img-top" alt="카드이미지">
+  <div class="card-body">
+    <h5 class="card-title">Image</h5>
+    <p class="card-text">Show Image</p>
+    <a href="../resources/upload/board/${f.fileName }" class="btn btn-primary">${f.oriName}</a>
+  </div>
+  </c:forEach>
+</div>
+	<button type="button" class="btn btn-outline-light"><a href="./list">LIST</a></button>
+	<button type="button" class="btn btn-outline-light"><a href="./update?num=${detail.num }">UPDATE</a></button>
+	<button type="button" class="btn btn-outline-light"><a href="./delete?num=${detail.num }">DEL</a></button>
 
 	<!-- Option 1: Bootstrap Bundle with Popper -->
 	<script

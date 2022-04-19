@@ -15,7 +15,7 @@ class BoardMapperTest {
 	@Autowired
 	private BoardMapper boardMapper;
 	
-	@Test
+	//@Test
 	void getFileDetail() throws Exception{
 		BoardFilesVO boardFilesVO= new BoardFilesVO();
 		boardFilesVO.setNum(3L);
@@ -50,10 +50,10 @@ class BoardMapperTest {
 		assertEquals(1, result);
 	}
 	
-	//@Test
+	@Test
 	void test() throws Exception {
 		BoardVO boardVO = new BoardVO();
-		boardVO.setNum(3L);
+		boardVO.setNum(112L);
 		boardVO=boardMapper.getDetail(boardVO);
 		System.out.println(boardVO.toString());
 		assertNotNull(boardVO);

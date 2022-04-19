@@ -42,7 +42,7 @@
 						<c:forEach items="${list}" var="board">
 							<tr>
 								<th scope="row">${board.num}
-								<td>${board.title }</td>
+								<td><a href="./detail?num=${pageScope.board.num}">${board.title }</a></td>
 								<td>${board.contents }</td>
 								<td>${board.writer }</td>
 								<td>${board.regDate }</td>

@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.keem.boot3.util.FileManager;
 import com.keem.boot3.util.Pager;
 
 @Service
@@ -12,6 +14,9 @@ public class BoardService {
 
 	@Autowired
 	private BoardMapper boardMapper;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	public List<BoardVO> getList(Pager pager) throws Exception{
 		pager.makeRow();
@@ -21,8 +26,38 @@ public class BoardService {
 		
 		return ar;
 	}
-	public int setAdd(BoardVO boardVO) throws Exception{
+	public int setAdd(BoardVO boardVO,MultipartFile [] files) throws Exception{
+		System.out.println("Insert전 : "+boardVO.getNum());
 		int result = boardMapper.setAdd(boardVO);
+		System.out.println("Insert후 : "+boardVO.getNum());
+		
+		for(MultipartFile mf: files) {
+			if(mf.isEmpty()) {
+				continue;
+			}
+			
+		// File을 하드디스크에 저장
+		String fileName=fileManager.fileSave(mf, "resources/upload/board/");
+		System.out.println(fileName);
+		//저장된 정보를 DB에 저장
+		BoardFilesVO boardFilesVO= new BoardFilesVO();
+		boardFilesVO.setNum(boardVO.getNum());
+		boardFilesVO.setFileName(fileName);
+		boardFilesVO.setOriName(mf.getOriginalFilename());
+		boardMapper.setFileAdd(boardFilesVO);
+		}
 		return result;
+	}
+	
+	public BoardVO getDetail(BoardVO boardVO) throws Exception{
+		return boardMapper.getDetail(boardVO); 
+	}
+	
+	public int setUpdate(BoardVO boardVO) throws Exception{
+		return boardMapper.setUpdate(boardVO);
+	}
+	
+	public int setDelete(BoardVO boardVO) throws Exception{
+		return boardMapper.setDelete(boardVO);
 	}
 }
