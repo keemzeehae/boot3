@@ -4,6 +4,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.javassist.compiler.ast.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ public class MemberController {
 		return "member";
 	}
 
+	
 	@GetMapping("join")
 	public void join() throws Exception {
 
@@ -72,4 +74,39 @@ public class MemberController {
 		return path;
 	}
 
+	@GetMapping("mypage")
+	public ModelAndView mypage(HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO=(MemberVO)session.getAttribute("member");
+		memberVO=memberService.mypage(memberVO);
+		
+		mv.addObject("dto",memberVO);
+		mv.setViewName("member/mypage");
+		return mv;
+	}
+	@GetMapping("logout")
+	public String logout(HttpSession session) throws Exception{
+		session.invalidate();
+		return "redirect:../";
+	}
+	@GetMapping("delete")
+	public String delete(HttpSession session,MemberVO memberVO) throws Exception{
+		int result = memberService.delete(memberVO);
+		session.invalidate();
+		return "redirect:../";
+	}
+	
+	@GetMapping("infoUpdate")
+	public ModelAndView infoUpdate(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		memberVO=memberService.mypage(memberVO);
+		mv.addObject("member",memberVO);
+		mv.setViewName("member/infoUpdate");
+		return mv;
+	}
+	@PostMapping("infoUpdate")
+	public String infoUpdate(MemberVO memberVO,HttpSession session) throws Exception{
+		int result= memberService.infoUpdate(memberVO);
+		return "redirect:./mypage";
+	}
 }

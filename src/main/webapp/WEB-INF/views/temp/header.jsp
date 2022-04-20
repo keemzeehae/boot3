@@ -12,13 +12,34 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<c:if test="${ not empty member}">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="/">Home</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						href="/board/list">Board</a></li>
-						
-						<c:if test="${empty member}">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Dropdown </a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="/member/mypage">마이페이지</a></li>
+							<li><a class="dropdown-item" href="/member/logout">로그아웃</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="#">Something else
+									here</a></li>
+						</ul></li>
+					<li class="nav-item"><a class="nav-link disabled">Disabled</a>
+					</li>
+				</ul>
+				</c:if>
+				
+				<c:if test="${ empty member}">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="/">Home</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="/board/list">Board</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -27,27 +48,14 @@
 							<li><a class="dropdown-item" href="/member/join">회원가입</a></li>
 							<li><a class="dropdown-item" href="/member/login">로그인</a></li>
 							<li><hr class="dropdown-divider"></li>
-							<a class="dropdown-item" href="#">Something else
-									here</a></li>
-						
-						</c:if>
-						<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Dropdown </a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<c:if test="${not empty member}">
-							<li><a class="dropdown-item" href="/member/mypage">My Page</a></li>
-							<li><a class="dropdown-item" href="/member/logout">Logout</a></li>
-							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="#">Something else
 									here</a></li>
-						</c:if></ul>
-							
-					</ul></li>
+						</ul></li>
 					<li class="nav-item"><a class="nav-link disabled">Disabled</a>
 					</li>
 				</ul>
+				</c:if>
+				
 				<form class="d-flex">
 					<div class="d-flex align-items-center">
 						<select class="form-select" aria-label="Default select example" name="kind">

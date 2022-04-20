@@ -33,4 +33,15 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public MemberVO mypage(MemberVO memberVO) throws Exception{
+		return memberMapper.mypage(memberVO);
+	}
+	
+	public int infoUpdate(MemberVO memberVO) throws Exception{
+		return memberMapper.infoUpdate(memberVO);
+	}
+	public int delete(MemberVO memberVO) throws Exception{
+		return memberMapper.delete(memberVO);
+	}
 }
