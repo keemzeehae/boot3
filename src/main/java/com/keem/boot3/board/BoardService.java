@@ -18,6 +18,11 @@ public class BoardService {
 	@Autowired
 	private FileManager fileManager;
 	
+	//getFileDetail
+	public BoardFilesVO getFileDetail(BoardFilesVO boardFilesVO) throws Exception{
+		return boardMapper.getFileDetail(boardFilesVO);
+	}
+	
 	public List<BoardVO> getList(Pager pager) throws Exception{
 		pager.makeRow();
 		Integer totalCount= boardMapper.total(pager);
@@ -60,4 +65,6 @@ public class BoardService {
 	public int setDelete(BoardVO boardVO) throws Exception{
 		return boardMapper.setDelete(boardVO);
 	}
+	
+	
 }

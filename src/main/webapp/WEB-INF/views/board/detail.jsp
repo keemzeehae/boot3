@@ -49,6 +49,7 @@
     <h5 class="card-title">Image</h5>
     <p class="card-text">Show Image</p>
     <a href="../resources/upload/board/${f.fileName }" class="btn btn-primary">${f.oriName}</a>
+    <a href="./fileDown?fileNum=${f.fileNum }" class="btn btn-primary">${f.oriName}</a>
   </div>
   </c:forEach>
 </div>

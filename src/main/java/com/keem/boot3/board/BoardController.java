@@ -26,6 +26,16 @@ public class BoardController {
 		return "board";
 		
 	}
+	@GetMapping("fileDown")
+	public ModelAndView getFileDown(BoardFilesVO boardFilesVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		boardFilesVO = boardService.getFileDetail(boardFilesVO);
+		//속성명은 fileDown 클래스에서 사용하는 이름과 동일하게
+		mv.addObject("fileVO",boardFilesVO);
+		//Bean(클래스)의 이름과 동일하게 FileDown클래스에서 Component옆에 준 이름 Component("fd") 라고 주면 setViewName도 "fd"가 된다.
+		mv.setViewName("fileDown");
+		return mv;
+	}
 	
 	@GetMapping("list")
 	public ModelAndView getList(Pager pager) throws Exception{

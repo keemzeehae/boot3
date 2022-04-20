@@ -10,7 +10,7 @@
 	</select>
 
 	<select id="getFileDetail" parameterType="BoardFilesVO" resultType="BoardFilesVO">
-		SELECT * FROM BOARDFILES WHERE NUM=#{num}
+		SELECT * FROM BOARDFILES WHERE FILENUM=#{fileNum}
 	</select>
 	
 	<insert id="setFileAdd" parameterType="BoardFilesVO">
