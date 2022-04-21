@@ -40,27 +40,37 @@
 			<input type="text" name="writer" class="form-control"
 				id="writer">
 		</div>
-		<div class="mb-3">
-			<label for="files" class="form-label">File</label>
-			<input type="file" name="files" class="form-control"
-				id="file1">
-		</div>
-		<div class="mb-3">
-			<label for="files" class="form-label">File</label>
-			<input type="file" name="files" class="form-control"
-				id="file2">
-		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="button" id="fileAdd" class="btn btn-outline-info d-block">파일추가</button>
+		<div id="fileResult"></div>
+		<button type="submit" class="btn btn-primary d-block">Submit</button>
 	</form>
 </div>
 </div>
 	
 
 
-	<!-- Option 1: Bootstrap Bundle with Popper -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
+<c:import url="../temp/header_script.jsp"></c:import>
+<script type="text/javascript">
+
+	let count =0;
+	$("#fileAdd").click(function(){
+		if(count>4){
+			alert("최대 5개까지 가능합니다.")
+			return;
+		}
+		let f='<div class="mb-3">';
+		f=f+'<label for="files" class="form-label">File</label><input type="file" name="files" class="form-control" id="file1"><button type="button" class="btn btn-light del">X</button>';
+		f=f+'</div>';
+		
+		$("#fileResult").append(f);
+		count++;
+	});	
+	
+	$("#fileResult").on("click",".del",function(){
+		$(this).parent().remove();
+		count--;
+	});
+	
+</script>
 </body>
 </html>
