@@ -20,13 +20,13 @@
 	<div class="container mt-4">
 		<div class="row mt-4">
 			<div class="alert alert-primary" role="alert">
-				<h6 style="text-transform: uppercase;" class="text-center">${sessionScope.member.name }님
+				<h6 style="text-transform: uppercase;" class="text-center">${dto.name }님
 					마이페이지</h6>
 			</div>
 			<form>
 				<div class="mb-3">
 					<label for="ID" class="form-label">ID </label> <input type="text"
-						name="id" readonly="readonly" value="${dto.id }"
+						name="id" readonly="readonly" value="${sessionScope.member.id }"
 						class="form-control" id="exampleInputEmail1"
 						aria-describedby="emailHelp">
 				</div>
