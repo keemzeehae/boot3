@@ -15,7 +15,6 @@
 	crossorigin="anonymous">
 	
 <c:import url="../temp/header_script.jsp"></c:import>
-
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
@@ -25,24 +24,29 @@
 <div class="container mt-4">
 	<div class="row mt-4">
 			<div class="alert alert-primary" role="alert">
-				<h6 style="text-transform: uppercase;" class="text-center">${board} Write</h6>
+				<h6 style="text-transform: uppercase;" class="text-center">${product} ADD</h6>
 			</div>
 	<form action="./add" method="post" enctype="multipart/form-data">
 		<div class="mb-3">
-			<label for="Title" class="form-label">제목
-			</label> <input type="text" name="title" class="form-control"
-				id="Contents" aria-describedby="emailHelp">
-			<div id="emailHelp" class="form-text">100자 이하로 작성해주세요</div>
+			<label for="productName" class="form-label">Character Name
+			</label> <input type="text" name="productName" class="form-control"
+				id="productName" aria-describedby="emailHelp">
+			<div id="emailHelp" class="form-text">100자 이하로 작성해주세요.</div>
 		</div>
 		<div class="mb-3">
-			<label for="contents" class="form-label">내용</label>
-			<textarea rows="10" cols="10" name="contents" class="form-control" id="summernote"></textarea> 
+			<label for="productPrice" class="form-label">가격</label>
+			<input type="text" name="productPrice" class="form-control"
+				id="productPrice">
 		</div>
 		
 		<div class="mb-3">
-			<label for="writer" class="form-label">작성자</label>
-			<input type="text" name="writer" class="form-control"
-				id="writer">
+			<label for="productCount" class="form-label">수량</label>
+			<input type="text" name="productCount" class="form-control"
+				id="productCount">
+		</div>
+		<div class="mb-3">
+			<label for="productDetail" class="form-label">캐릭터 정보</label>
+			<textarea rows="10" cols="10" name="productDetail" class="form-control" id="summernote"></textarea> 
 		</div>
 		<button type="button" id="fileAdd" class="btn btn-outline-info d-block">파일추가</button>
 		<div id="fileResult"></div>
@@ -56,7 +60,7 @@
 
 <script type="text/javascript">
 	$('#summernote').summernote({
-	height: 400
+		height:400
 	});
 	let count =0;
 	$("#fileAdd").click(function(){
