@@ -54,6 +54,15 @@
 	</div>
 	
 	<div class="container">
+		<input type="text" id="v1">
+		<input type="checkbox" name="num" class="num" value="a">
+		<input type="checkbox" name="num" class="num" value="b">
+		<input type="checkbox" name="num" class="num" value="c">
+		<input type="checkbox" name="num" class="num" value="d">
+		<button id="btn1">Get</button>
+		
+		<button id="btn5">Post</button>
+		<button id="btn6">Ajax</button>
 	<input type="text" id="d1">
 		<button id="btn">Click</button>
 		<button id="btn2">Click2</button>
@@ -68,6 +77,53 @@
 
 <c:import url="./temp/header_script.jsp"></c:import>
 <script type="text/javascript">
+	$("#btn1").click(function () {
+		let v = $("#v1").val();
+		console.log(v);
+		$.get("./getTest?msg="+v,function(data){
+			console.log("응답 완료");
+			console.log(data.trim());
+		});
+		
+	})
+	
+	$("#btn5").click(function () {
+		let p= $("#v1").val();
+		console.log(p);
+		$.post("./postTest",{msg:p},function(post){
+			console.log(post.trim());
+		});
+		
+	});
+	$("#btn6").click(function(){
+		let ar=[1,2,3];
+		let nums=[];
+		$(".num").each(function(idx,item){
+			if($(item).prop("checked")){
+				console.log($(item).val());
+				nums.push($(item).val());
+			}
+		});
+		
+		let v = $("#v1").val();
+		$.ajax({
+			type:"POST",
+			url: "./arrayTest",
+			traditional: true,
+			data: {
+				msg: v,
+				numbers : ar,
+				nums: nums
+			},
+			success:function(d){
+				console.log(d.trim());
+			},
+			error:function(){
+				alert('에러 발생');
+			}
+		});
+	});
+
 	/* const ch=document.getElementsByClassName("ch"); //배열
 	
 	for(c of ch){

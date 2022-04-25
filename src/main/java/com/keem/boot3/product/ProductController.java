@@ -39,9 +39,12 @@ public class ProductController {
 	}
 	
 	@PostMapping("add")
-	public String setAdd(ProductVO productVO,MultipartFile [] files) throws Exception{
+	public ModelAndView setAdd(ProductVO productVO,MultipartFile [] files) throws Exception{
+		ModelAndView mv = new ModelAndView();
 		int result = productService.setAdd(productVO, files);
-		return "redirect:./list";
+		mv.setViewName("common/result");
+		mv.addObject("result",result);
+		return mv;
 	}
 	
 	
