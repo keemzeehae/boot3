@@ -37,6 +37,15 @@ public class ProductController {
 	public void setAdd() throws Exception{
 		
 	}
+	@GetMapping("ajaxList")
+	public ModelAndView getAjaxList(Pager pager) throws Exception{
+		ModelAndView mv= new ModelAndView();
+		List<ProductVO> ar = productService.getList(pager);
+		mv.addObject("list",ar);
+		mv.addObject("pager",pager);
+		mv.setViewName("common/productList");
+		return mv;
+	}
 	
 	@PostMapping("add")
 	public ModelAndView setAdd(ProductVO productVO,MultipartFile [] files) throws Exception{
