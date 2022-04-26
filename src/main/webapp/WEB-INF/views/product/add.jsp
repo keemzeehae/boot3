@@ -107,19 +107,40 @@
 		}
 
 		$("#add").click(function() {
+			let formData = new FormData();
 			let productName = $("#productName").val();
 			let productPrice = $("#productPrice").val();
 			let productCount = $("#productCount").val();
 			let productDetail = $("#productDetail").summernote("code"); //$("#productDetail").val();
+			$(".files").each(function(idx,item){
+				if(item.files.length>0){
+					console.log(idx);  //index번호
+					console.log(item); //<input type="files">
+					console.log(item.files);  //input 태그의 file 리스트
+					console.log(item.files[0]); //file list 중 첫번째 파일
+					console.log("length: ",item.files.length); 
+					console.log(item.files[0].name); //files list중 첫번째 파일의 이름
+					//formData.append("파라미터명", 값);
+					formData.append("files", item.files[0]);
+			}
+			});  //each끝
+			
+			formData.append("productName",productName);
+			formData.append("productPrice",productPrice);
+			formData.append("productCount",productCount);
+			formData.append("productDetail",productDetail);
+			
 			$.ajax({
 				type : "POST",
 				url : "./add",
-				data : {
+				processData: false,
+				contentType: false,
+				data:formData /* {
 					productName : productName,
 					productPrice : productPrice,
 					productCount : productCount,
 					productDetail : productDetail
-				},
+				} */,
 				success : function(data) {
 					if (data.trim() == '1') {
 						alert("상품 등록 완료");
@@ -151,7 +172,7 @@
 							}
 							let f = '<div class="mb-3">';
 							f = f
-									+ '<label for="files" class="form-label">File</label><input type="file" name="files" class="form-control" id="file1"><button type="button" class="btn btn-light del">X</button>';
+									+ '<label for="files" class="form-label">File</label><input type="file" name="files" class="form-control files" id="file1"><button type="button" class="btn btn-light del">X</button>';
 							f = f + '</div>';
 
 							$("#fileResult").append(f);
@@ -163,31 +184,9 @@
 			count--;
 		});
 		
-		$("fileResult").on("click",function(){
-			var form=$("#file1")[0].files[0];
-			var formData= new FromData();
-			formData.append('files',form);
+		
 			
-			$.ajax({
-				type: "POST",
-				enctype:"multipart/form-data",
-				url:"/upload/product",
-				data:formData,
-				processData:false,
-				contentType:false,
-				cache:false,
-				timeout:600000,
-				success:function(data){
-					alert("성공");
-					
-				},
-				error:function(e){
-					alert("실패");
-				}
-			});
-			
-			
-		});
+
 	</script>
 </body>
 </html>
