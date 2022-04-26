@@ -57,4 +57,10 @@ public class FileManager {
 		
 		return fileName;
 	}
+	
+	public boolean fileDelete(String fileName,String path)throws Exception{
+		path=servletContext.getRealPath(path);
+		File file= new File(path,fileName);
+		return file.delete();
+	}
 }
