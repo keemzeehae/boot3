@@ -1,5 +1,7 @@
 package com.keem.boot3.member;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -25,4 +27,7 @@ public interface MemberMapper {
 	
 	//상세파일
 	public MemberFilesVO detailFile(MemberFilesVO memberFilesVO) throws Exception;
+	
+	//role
+	public int setRoleAdd(Map<String, String> map) throws Exception;
 }

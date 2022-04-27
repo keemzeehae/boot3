@@ -52,6 +52,13 @@
 			</button>
 		</div>
 	</div>
+	<div class="container">
+	<c:if test="${not empty member }">
+		<c:forEach items="${member.roleVOs}" var="dto">
+			<h6>${dto.roleName }</h6>
+		</c:forEach>
+	</c:if>
+	</div>
 	
 	<div class="container">
 		<input type="text" id="v1">

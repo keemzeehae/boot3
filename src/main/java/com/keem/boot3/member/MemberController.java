@@ -65,6 +65,7 @@ public class MemberController {
 
 		memberVO = memberService.login(memberVO);
 		String path = "redirect:./login";
+//		System.out.println(memberVO.getRoleVOs().get(0).getRoleName());
 		if (memberVO != null) {
 			// 로그인한 사용자의 정보 Session에 들어가 있음 member 라는 이름으로
 			session.setAttribute("member", memberVO);

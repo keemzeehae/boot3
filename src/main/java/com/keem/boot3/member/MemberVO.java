@@ -15,4 +15,5 @@ public class MemberVO {
 	
 	private MemberFilesVO memberFilesVO;
 	
+	private List<RoleVO> roleVOs;
 }

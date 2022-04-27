@@ -29,13 +29,18 @@
 							<li><a class="dropdown-item" href="#">Something else
 									here</a></li>
 						</ul>
-						
-						</li>
 						<li class="nav-item"><a class="nav-link active"
 							href="/product/list">Character</a></li>
-					
+							
+						<c:forEach items="${member.roleVOs}" var="vo">
+							<c:if test="${vo.roleName eq 'ROLE_ADMIN' }">
+						<li class="nav-item"><a class="nav-link active"
+							href="/product/manage">Character 관리</a></li>
+							</c:if>
+						</c:forEach>
 					</ul>
 				</c:if>
+
 				
 				<c:if test="${ empty member}">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
