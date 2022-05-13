@@ -22,7 +22,7 @@
 	<div class="container mt-4">
 		<div class="row mt-4">
 			<div class="alert alert-primary" role="alert">
-				<h6 style="text-transform: uppercase;" class="text-center">${product} List</h6>
+				<h6 style="text-transform: uppercase;" class="text-center">${board} List</h6>
 			</div>
 		</div>
 	
