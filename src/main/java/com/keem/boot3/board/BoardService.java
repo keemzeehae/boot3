@@ -48,8 +48,8 @@ public class BoardService {
 
 	public List<BoardVO> getList(Pager pager) throws Exception {
 		pager.makeRow();
-		Integer totalCount = boardMapper.total(pager);
-		pager.makenum(totalCount);
+		Long totalCount = boardMapper.total(pager);
+		pager.makeNum(totalCount);
 		List<BoardVO> ar = boardMapper.getList(pager);
 
 		return ar;

@@ -29,7 +29,7 @@ public class MemberInterceptor implements HandlerInterceptor{
 			}
 		}
 		if(!check) {
-			request.setAttribute("message", "로그인 하세요.");
+			request.setAttribute("msg", "로그인 하세요.");
 			request.setAttribute("path", "../member/login");
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/getResult.jsp");
 			view.forward(request, response);

@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class Pager {
 
+	private String id;
 	// DB에서 몇개씩 조회
 	private Integer perPage;
 	
@@ -21,8 +22,8 @@ public class Pager {
 	
 	
 	//-----------------JSP사용변수
-	private Integer startNum;
-	private Integer lastNum;
+	private Long startNum;
+	private Long lastNum;
 	
 	private boolean pre;
 	private boolean next;
@@ -58,26 +59,26 @@ public class Pager {
 			return this.search;
 	}
 	
-	public void makenum(Integer totalCount) {
+	public void makeNum(Long totalCount) {
 		// 전체 row의 갯수 구해옴
 		
 		// 전체 page 의 갯수 구하기
-		Integer totalPage=totalCount/this.getPerPage();
+		Long totalPage=totalCount/this.getPerPage();
 		if(totalCount%this.getPerPage()!=0) {
 			totalPage++;
 			
 		}
 		// 블럭당 갯수 블럭 의미: 아래 보여지는 번호 
-		Integer perBlock=5;
+		Long perBlock=5L;
 		
 		// 전체 블럭의 갯수
-		Integer totalBlock=totalPage/perBlock;
+		Long totalBlock=totalPage/perBlock;
 		if(totalPage%perBlock!=0) {
 			totalBlock++;
 			
 		}
 		// page번호로 현재 몇번째 Block인지 계산
-		Integer curBlock = this.getPn()/perBlock;
+		Long curBlock = this.getPn()/perBlock;
 		if(this.getPn()%perBlock!=0) {
 			curBlock++;
 		}
@@ -98,7 +99,7 @@ public class Pager {
 		
 		// 현재 블럭이 마지막 블럭번호와 같다면
 		if(curBlock==totalBlock) {
-			this.lastNum=totalPage;
+			this.lastNum=0L;
 		}
 	}
 }

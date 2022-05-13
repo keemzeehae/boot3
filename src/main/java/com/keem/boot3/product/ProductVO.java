@@ -13,7 +13,8 @@ public class ProductVO {
 	private Integer productPrice;
 	private Integer productCount;
 	private String productDetail;
+	private String id;
+	private Integer sale;
 
-	private ProductFilesVO productFilesVO;
 	private List<ProductFilesVO> productFilesVOs;
 }

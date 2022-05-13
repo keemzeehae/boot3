@@ -36,7 +36,7 @@ public class AdminInterceptor implements HandlerInterceptor {
 			//check -> true면 통과 
 			//check -> false면 거절 : Servlet 코드 사용
 			if(!check) {
-				request.setAttribute("message", "권한이 없습니다.");
+				request.setAttribute("msg", "권한이 없습니다.");
 				request.setAttribute("path", "../");
 				
 				
