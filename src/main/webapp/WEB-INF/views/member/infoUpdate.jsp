@@ -17,61 +17,52 @@
 </head>
 <body>
 	<c:import url="../temp/header.jsp"></c:import>
-	<form action="./infoUpdate" method="POST" enctype="multipart/form-data">
+	
 		<div class="container mt-4">
 			<div class="row mt-4">
-				<div class="alert alert-primary" role="alert">
-					<h6 style="text-transform: uppercase;" class="text-center">${sessionScope.member.name }님
-						정보수정</h6>
+				<div class="alert alert-light" role="alert">
+					<h4 style="text-transform: uppercase;">${board} Update</h4>
 				</div>
-
-				<div class="mb-3">
-					<label for="ID" class="form-label">ID </label> <input type="text"
-						name="id" readonly="readonly" value="${member.id }"
-						class="form-control" id="exampleInputEmail1"
-						aria-describedby="emailHelp">
-				</div>
-				<div class="mb-3">
-					<label for="exampleInputPassword1" class="form-label">Password</label>
-					<input type="password" class="form-control" name="pw"
-						readonly="readonly" value="${member.pw }"
-						id="exampleInputPassword1">
-				</div>
-				<div class="mb-3">
-					<label for="name" class="form-label">NAME</label> <input
-						type="text" class="form-control" name="name"
-						value="${member.name }" id="name">
-				</div>
-				<div class="mb-3">
-					<label for="email" class="form-label">EMAIL</label> <input
-						type="text" class="form-control" name="email"
-						value="${member.email }" id="email">
-				</div>
-				<div class="mb-3">
-					<label for="exampleInputPassword1" class="form-label">PHONE</label>
-					<input type="text" class="form-control" name="phone"
-						value="${member.phone }" id="phone">
-				</div>
-
-				<div class="card" style="width: 18rem;">
-
-					<img
-						src="../resources/upload/member/${member.memberFilesVO.fileName}"
-						class="card-img-top" alt="카드이미지">
-					<div class="card-body">
-						<h5 class="card-title">Image</h5>
-						<p class="card-text">Show Image</p>
-						<a href="./fileDown?fileNum=${member.memberFilesVO.fileNum }"
-							class="btn btn-primary">${member.memberFilesVO.oriName}</a>
+			</div>
+				
+			<div class="row mt-4">
+			<form action="update" method="post" enctype="multipart/form-data">
+				
+				<div class="row mb-3">
+					<label for="name" class="col-sm-2 col-form-label">Name</label>
+					<div class="col-sm-10">
+						<input type="text" value="${vo.email}" name="name" class="form-control" id="name">
 					</div>
-
 				</div>
-			</div>
 
-			<div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</div>
-	</form>
+				<div class="row mb-3">
+					<label for="Email" class="col-sm-2 col-form-label">Email</label>
+					<div class="col-sm-10">
+						<input type="email" value="${vo.email}" name="email" class="form-control" id="email">
+					</div>
+				</div>
+				
+				<div class="row mb-3">
+					<label for="phone" class="col-sm-2 col-form-label">Phone</label>
+					<div class="col-sm-10">
+						<input type="text" value="${vo.phone}" name="phone" class="form-control" id="phone">
+					</div>
+				</div>				
+
+				<div class="row mb-3">
+					<label for="files" class="col-sm-2 col-form-label">File</label>
+					<div class="col-sm-10">
+						<input type="file" name="files" class="form-control" id="files">
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Join</button>
+			</form>
+
+		</div>
+
+
+	</div>
 
 	<!-- Option 1: Bootstrap Bundle with Popper -->
 	<script

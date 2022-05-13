@@ -20,7 +20,7 @@
 	<div class="container mt-4">
 		<div class="row mt-4">
 			<div class="alert alert-primary" role="alert">
-				<h6 style="text-transform: uppercase;" class="text-center">${dto.name }님
+				<h6 style="text-transform: uppercase;" class="text-center">${vo.name }님
 					마이페이지</h6>
 			</div>
 			<form>
@@ -33,39 +33,39 @@
 				<div class="mb-3">
 					<label for="exampleInputPassword1" class="form-label">Password</label>
 					<input type="password" class="form-control" name="pw"
-						readonly="readonly" value="${dto.pw }" id="exampleInputPassword1">
+						readonly="readonly" value="${vo.pw }" id="exampleInputPassword1">
 				</div>
 				<div class="mb-3">
 					<label for="name" class="form-label">NAME</label> <input
 						type="text" class="form-control" name="name" readonly="readonly"
-						value="${dto.name }" id="name">
+						value="${vo.name }" id="name">
 				</div>
 				<div class="mb-3">
 					<label for="email" class="form-label">EMAIL</label> <input
 						type="text" class="form-control" name="email" readonly="readonly"
-						value="${dto.email }" id="email">
+						value="${vo.email }" id="email">
 				</div>
 				<div class="mb-3">
 					<label for="exampleInputPassword1" class="form-label">PHONE</label>
 					<input type="text" class="form-control" name="phone"
-						readonly="readonly" value="${dto.phone }" id="phone">
+						readonly="readonly" value="${vo.phone }" id="phone">
 				</div>
 
 				<div class="card" style="width: 18rem;">
 
-					<img src="../resources/upload/member/${dto.memberFilesVO.fileName}"
+					<img src="../resources/upload/member/${vo.memberFilesVO.fileName}"
 						class="card-img-top" alt="카드이미지">
 					<div class="card-body">
 						<h5 class="card-title">Image</h5>
 						<p class="card-text">Show Image</p>
-						<a href="./fileDown?fileNum=${dto.memberFilesVO.fileNum }"
-							class="btn btn-primary">${dto.memberFilesVO.oriName}</a>
+						<a href="./fileDown?fileNum=${vo.memberFilesVO.fileNum }"
+							class="btn btn-primary">${vo.memberFilesVO.oriName}</a>
 					</div>
 
 				</div>
 
-	<button type="button" class="btn btn-outline-light"><a href="./infoUpdate?id=${dto.id }">정보수정</a></button>
-	<button type="button" class="btn btn-outline-light"><a href="./delete?id=${dto.id }">탈퇴하기</a></button>
+			<a href="update" role="button" class="btn btn-success mx-1">Update</a>
+			<a href="delete" role="button" class="btn btn-danger mx-1">Delete</a>
 
 				<!-- Option 1: Bootstrap Bundle with Popper -->
 				<script

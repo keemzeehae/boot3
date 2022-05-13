@@ -22,11 +22,11 @@
 			<div class="alert alert-primary" role="alert">
 				<h6 style="text-transform: uppercase;" class="text-center">LOGIN</h6>
 			</div>
-			<form action="./login" method="post">
+			<form action="login" method="post">
 				<form>
 					<div class="mb-3">
 						<label for="ID" class="form-label">ID </label> <input type="text"
-							name="id" value="${cookie.remember.value}" class="form-control" id="exampleInputEmail1"
+							name="id" class="form-control" id="exampleInputEmail1"
 							aria-describedby="emailHelp">
 					</div>
 					<div class="mb-3">
@@ -34,10 +34,7 @@
 						<input type="password" class="form-control" name="pw"
 							id="exampleInputPassword1">
 					</div>
-					<div class="mb-3 form-check">
-						<input type="checkbox" class="form-check-input" name="remember" value="1" id="exampleCheck1">
-						<label class="form-check-label" for="exampleCheck1">아이디 저장</label>
-					</div>
+				
 					<button type="submit" class="btn btn-primary">Login</button>
 				</form>
 

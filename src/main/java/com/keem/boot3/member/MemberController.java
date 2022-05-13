@@ -24,55 +24,45 @@ public class MemberController {
 	private MemberService memberService;
 
 	@ModelAttribute("member")
-	public String getMember() {
+	public String getBoard() {
 		return "member";
 	}
 
 	
 	@GetMapping("join")
-	public void join() throws Exception {
-
+	public ModelAndView join() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/join");
+		return mv;
 	}
 
 	@PostMapping("join")
-	public String join(MemberVO memberVO, MultipartFile mf) throws Exception {
-		int result = memberService.join(memberVO, mf);
-		return "redirect:../";
-	}
-
-	@GetMapping("login")
-	public void login(Model model,
-			@CookieValue(value = "rememberID", defaultValue = "", required = false) String rememberID)
-			throws Exception {
-
+	public ModelAndView join(MemberVO memberVO, MultipartFile files) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = memberService.join(memberVO, files);
+		mv.setViewName("redirect:../");
+		return mv;
 	}
 
 	@PostMapping("login")
-	public String login(MemberVO memberVO, HttpSession session, String remember, Model model,
-			HttpServletResponse response) throws Exception {
-		System.out.println("Remember:" + remember);
-		if (remember != null && remember.equals("1")) {
-			Cookie cookie = new Cookie("remember", memberVO.getId());
-			// 남아있게 만들기
-			cookie.setMaxAge(-1);
-			response.addCookie(cookie);
-
-		} else {
-			Cookie cookie = new Cookie("remember", "");
-			cookie.setMaxAge(0);
-			response.addCookie(cookie);
-		}
-
+	public ModelAndView login(MemberVO memberVO, HttpSession session)throws Exception{
+		ModelAndView mv = new ModelAndView();
 		memberVO = memberService.login(memberVO);
-		String path = "redirect:./login";
-//		System.out.println(memberVO.getRoleVOs().get(0).getRoleName());
-		if (memberVO != null) {
-			// 로그인한 사용자의 정보 Session에 들어가 있음 member 라는 이름으로
+		mv.setViewName("member/login");
+		
+		if(memberVO!=null) {
 			session.setAttribute("member", memberVO);
-			path = "redirect:../";
+			mv.setViewName("redirect:../");
 		}
-
-		return path;
+		
+		return mv;
+	}
+	
+	@GetMapping("login")
+	public ModelAndView login()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/login");
+		return mv;
 	}
 
 	@GetMapping("mypage")
@@ -81,7 +71,7 @@ public class MemberController {
 		MemberVO memberVO=(MemberVO)session.getAttribute("member");
 		memberVO=memberService.mypage(memberVO);
 		
-		mv.addObject("dto",memberVO);
+		mv.addObject("vo",memberVO);
 		mv.setViewName("member/mypage");
 		return mv;
 	}
@@ -91,23 +81,33 @@ public class MemberController {
 		return "redirect:../";
 	}
 	@GetMapping("delete")
-	public String delete(HttpSession session,MemberVO memberVO) throws Exception{
+	public ModelAndView delete(HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO=(MemberVO)session.getAttribute("member");
 		int result = memberService.delete(memberVO);
 		session.invalidate();
-		return "redirect:../";
+		mv.setViewName("redirect:../");
+		return mv;
 	}
 	
 	@GetMapping("infoUpdate")
-	public ModelAndView infoUpdate(MemberVO memberVO) throws Exception{
+	public ModelAndView infoUpdate(HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		memberVO=memberService.mypage(memberVO);
-		mv.addObject("member",memberVO);
+		mv.addObject("vo",memberVO);
 		mv.setViewName("member/infoUpdate");
 		return mv;
 	}
+	
 	@PostMapping("infoUpdate")
-	public String infoUpdate(MemberVO memberVO,HttpSession session) throws Exception{
+	public ModelAndView infoUpdate(MemberVO memberVO,HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO vo=(MemberVO)session.getAttribute("member");
+		memberVO.setId(vo.getId());
 		int result= memberService.infoUpdate(memberVO);
-		return "redirect:./mypage";
+		mv.setViewName("redirect:./mypage");
+		return mv;
+		
 	}
 }
