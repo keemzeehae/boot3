@@ -5,9 +5,10 @@
     
 <mapper namespace="com.keem.boot3.board.BoardMapper">
 
-	<select id="getFileList" resultType="BoardFilesVO">
-		SELECT * FROM BOARDFILES
-	</select>
+	<select id="getFileList" parameterType="BoardVO" resultType="BoardFilesVO">
+ 		SELECT * FROM BOARDFILES WHERE NUM=#{num}
+ 	</select>
+ 
 
 	<select id="getFileDetail" parameterType="BoardFilesVO" resultType="BoardFilesVO">
 		SELECT * FROM BOARDFILES WHERE FILENUM=#{fileNum}
@@ -41,7 +42,7 @@
 			<result column="step" property="step"/>
 			<result column="depth" property="depth"/>
 			<result column="category" property="category"/>
-		<collection property="filesVO" javaType="java.util.List" ofType="BoardFilesVO">
+		<collection property="filesVOs" javaType="java.util.List" ofType="BoardFilesVO">
 			<id column="fileNum" property="fileNum"/>
 			<result column="fileName" property="fileName"/>
 			<result column="oriName" property="oriName"/>
@@ -67,23 +68,22 @@
 		ORDER BY NUM DESC
 		LIMIT #{startRow},#{perPage}
 	</select>
-	<select id="total" resultType="Integer" parameterType="Pager">
-		SELECT COUNT(NUM) FROM BOARD 
-		WHERE NUM>0 
-		AND
-		<choose>
-			<when test="kind=='col1'">
-				CONTENTS
-			</when>
-			<when test="kind =='col2'">
-				TITLE
-			</when>
-			<otherwise>
-				WRITER
-			</otherwise>
-		</choose>
-		LIKE CONCAT('%',#{search},'%')
-	</select>
+	<select id="getTotalCount" resultType="java.lang.Long" parameterType="Pager">
+ 		SELECT COUNT(NUM) FROM BOARD
+ 		WHERE
+ 		<choose>
+ 			<when test="kind == 'col1'">
+ 				TITLE
+ 			</when>
+ 			<when test="kind == 'col2'">
+ 				CONTENTS
+ 			</when>
+ 			<otherwise>
+ 				WRITER
+ 			</otherwise>
+ 		</choose>
+ 		LIKE concat('%', #{search},'%')
+ 	</select>
 	<insert id="setAdd" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="num">
 		INSERT INTO BOARD (NUM,TITLE, WRITER, CONTENTS, HIT, REGDATE,REF,STEP,DEPTH,CATEGORY)
 		VALUES(#{num},#{title},#{writer},#{contents},0,NOW(),0,0,0,1)

@@ -20,16 +20,16 @@
 						href="/board/list">Board</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						href="/product/list">Product</a></li>
-					<c:forEach items="${member.roleVOs}" var="vo">
-					<c:if test="${vo.roleName eq 'ROLE_ADMIN'}">	
+					<c:forEach items="${requestScope.member.roleVOs}" var="roles">
+					<c:if test="${roles.roleName eq 'ROLE_ADMIN'}">	
 				        <li class="nav-item">
 				          	<a class="nav-link active" href="/admin/manage">관리자모드</a>
 				        </li>	        
 					</c:if>
 					</c:forEach>
 
-					<c:forEach items="${member.roleVOs}" var="vo">
-						<c:if test="${vo.roleName eq 'ROLE_SELLER'}">
+					<c:forEach items="${requestScope.member.roleVOs}" var="roles">
+						<c:if test="${roles.roleName eq 'ROLE_SELLER'}">
 							<li class="nav-item"><a class="nav-link active"
 								href="/product/manage">Product관리</a></li>
 						</c:if>

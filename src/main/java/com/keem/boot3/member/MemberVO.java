@@ -14,6 +14,7 @@ public class MemberVO {
 	private String phone;
 	
 	private MemberFilesVO memberFilesVO;
-	
 	private List<RoleVO> roleVOs;
+	
+	
 }

@@ -5,6 +5,9 @@
 <div class="container">
 	<h1>Detail Page</h1>
 	<div class="row">
+		<!-- items에 있는 거는 모델에 담겨있는 것 items ="${requestScope.files}" -->
+		<!-- var에 있는 files는 pageScope  -->
+		<!-- ${pageScope.files} pageScope가 생명주기가 가장 짧음 -->
 		<c:forEach items="${vo.productFilesVOs}" var="fileVO">
 			<img alt="" src="../resources/upload/product/${fileVO.fileName}">
 		</c:forEach>
